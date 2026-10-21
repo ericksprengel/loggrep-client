@@ -1,4 +1,4 @@
-import {Filter, LoggrepHandler} from 'loggrep/dist/types/log'
+import type {Filter, LoggrepHandler} from 'loggrep'
 
 export const handler: LoggrepHandler = async () => {
   const filters: Filter[] = [

@@ -1,5 +1,5 @@
-import {handler as pidcatHandler} from 'loggrep/dist/filters/pidcat'
-import { LoggrepHandler } from 'loggrep/dist/types/log'
+import {handler as pidcatHandler} from 'loggrep/filters/pidcat'
+import type {LoggrepHandler} from 'loggrep'
 
 export const handler: LoggrepHandler = async () => {
   return pidcatHandler({

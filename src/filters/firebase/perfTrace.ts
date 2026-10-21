@@ -1,5 +1,5 @@
-import {Filter, LoggrepHandler} from 'loggrep/dist/types/log'
-import logEntry from 'loggrep/dist/core/logEntry'
+import type {Filter, LoggrepHandler} from 'loggrep'
+import logEntry from 'loggrep/format'
 
 const LOG_TAG = 'LoggrepFbPerfTrace'
 
@@ -11,9 +11,8 @@ interface CustomTraceLogEntry {
   duration: number
 }
 
-const report: Record<string, CustomTraceLogEntry[]> = {}
-
 export const handler: LoggrepHandler = async () => {
+  const report: Record<string, CustomTraceLogEntry[]> = {}
   const filters: Filter[] = [
     { tag: /FirebasePerformance/, message: CUSTOM_TRACE_REGEX },
   ]
@@ -42,14 +41,14 @@ export const handler: LoggrepHandler = async () => {
         if (tag !== 'FirebasePerformance' || !message) {
           return
         }
-        const match = message.match(CUSTOM_TRACE_REGEX);
+        const match = message.match(CUSTOM_TRACE_REGEX)
         if (!match?.groups) {
           return
         }
         const { event_name, duration } = match.groups
         const traceLogEntry = {
           event_name,
-          duration: parseInt(duration.replace(',', '.'))
+          duration: Number.parseFloat(duration.replace(',', '.'))
         }
 
         if (!report[traceLogEntry.event_name]) {
