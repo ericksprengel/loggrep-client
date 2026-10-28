@@ -20,7 +20,7 @@ Enable Firebase Performance logs.
 ### Usage
 
 ```shell
-yarn loggrep logcat -f lib/filters/firebase/perfTrace.ts
+bun run loggrep -- -m src/filters/firebase/perfTrace.ts
 ```
 
 ### Output
