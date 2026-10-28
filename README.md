@@ -15,11 +15,12 @@ workspace/
 Use **Bun 1.4.3**, pinned in `.tool-versions`. From `loggrep-client/`:
 
 ```sh
+bun install --cwd ../loggrep --frozen-lockfile
 bun install --frozen-lockfile
 bun run loggrep -- --help
 ```
 
-The dependency is `file:../loggrep`; changes in the sibling checkout are consumed locally. For reproducible installation, use the migrated v3 checkout of loggrep. CI checks out both repositories as siblings, using `loggrep` from its `main` branch. Merge the loggrep v3 migration there before enabling this client workflow. No `lib/` output or compilation is required.
+The dependency is `file:../loggrep`; changes in the sibling checkout are consumed locally. For reproducible installation, use the migrated v3 checkout of loggrep. CI checks out both repositories as siblings, using `loggrep` from its `main` branch. Install dependencies in both checkouts: source imports from the local package resolve its dependencies from the sibling repository. No `lib/` output or compilation is required.
 
 ## Run examples
 
